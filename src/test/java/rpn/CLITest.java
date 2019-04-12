@@ -19,14 +19,22 @@ public class CLITest {
 
     @Test
     public void should_evaluate_single_digit_negative_constant() {
-
         assertThat(evaluate("-3")).isEqualTo(-3);
     }
 
     @Test
     public void should_evaluate_multiple_digit_negative_constant() {
-
         assertThat(evaluate("-45")).isEqualTo(-45);
+    }
+
+    @Test
+    public void should_evaluate_simple_decimal_digit() {
+        assertThat(evaluate("3.5")).isEqualTo(3.5);
+    }
+    
+    @Test
+    public void should_evaluate_simple_malformed_decimal_digit() {
+        assertThat(evaluate("4,2")).isEqualTo(4.2);
     }
 
     @Test
@@ -92,5 +100,10 @@ public class CLITest {
     @Test
     public void should_evaluate_complex_addition_subtraction_multiplication_and_division() {
         assertThat(evaluate("1 7 3 * + 2 / -3 + 7 -")).isEqualTo(1);
+    }
+
+    @Test
+    public void should_evaluate_simple_division_with_decimal_numbers() {
+        assertThat(evaluate("8,28 4.6 /")).isEqualTo(1.8);
     }
 }
