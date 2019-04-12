@@ -22,6 +22,9 @@ public class CLI {
         for (String token: tokens) {
             if("+".equals(token)) {
                 calculator.push(calculator.pop() + calculator.pop());
+            }else if("-".equals(token)) {
+                Long operand = calculator.pop();
+                calculator.push(calculator.pop() - operand);
             }else{
                 calculator.push(Long.valueOf(token));
             }
