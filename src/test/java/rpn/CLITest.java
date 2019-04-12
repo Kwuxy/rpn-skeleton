@@ -78,4 +78,19 @@ public class CLITest {
     public void should_evaluate_complex_multiplication_addition_and_subtraction_with_negative() {
         assertThat(evaluate("-1 4 * 5 + -8 -2 * +")).isEqualTo(17);
     }
+
+    @Test
+    public void should_evaluate_simple_division() {
+        assertThat(evaluate("6 2 /")).isEqualTo(3);
+    }
+
+    @Test
+    public void should_evaluate_more_complex_division() {
+        assertThat(evaluate("24 3 / 4 /")).isEqualTo(2);
+    }
+
+    @Test
+    public void should_evaluate_complex_addition_subtraction_multiplication_and_division() {
+        assertThat(evaluate("1 7 3 * + 2 / -3 + 7 -")).isEqualTo(1);
+    }
 }
