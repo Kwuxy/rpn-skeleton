@@ -41,4 +41,19 @@ public class CLITest {
     public void should_evaluate_complex_addition_and_subtraction() {
         assertThat(evaluate("1 5 + 8 + 4 - 6 + 12 -")).isEqualTo(4);
     }
+
+    @Test
+    public void should_evaluate_simple_multiplication() {
+        assertThat(evaluate("4 3 *")).isEqualTo(12);
+    }
+
+    @Test
+    public void should_evaluate_more_complex_multiplication() {
+        assertThat(evaluate("6 4 2 * *")).isEqualTo(48);
+    }
+
+    @Test
+    public void should_evaluate_complex_multiplication_addition_and_subtraction() {
+        assertThat(evaluate("1 8 3 * + 4 2 * -")).isEqualTo(17);
+    }
 }

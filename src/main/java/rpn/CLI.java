@@ -25,6 +25,8 @@ public class CLI {
             }else if("-".equals(token)) {
                 Long operand = calculator.pop();
                 calculator.push(calculator.pop() - operand);
+            }else if("*".equals(token)) {
+                calculator.push(calculator.pop() * calculator.pop());
             }else{
                 calculator.push(Long.valueOf(token));
             }
