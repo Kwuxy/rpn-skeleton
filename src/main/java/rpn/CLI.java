@@ -9,12 +9,20 @@ public class CLI {
     public static final void main(String[] args) {
         String expression = Stream.of(args).collect(Collectors.joining(" "));
 
-        List<Operator> operators = new ArrayList<>();
-        operators.add(new Plus());
+        List<Operator> operators = getAllOperators();
         Calculator calculator = new Calculator(operators);
 
         System.out.println("About to evaluate '" + expression + "'");
         Double result = calculator.evaluate(expression);
         System.out.println("> " + result);
+    }
+
+    static List<Operator> getAllOperators() {
+        List<Operator> operators = new ArrayList<>();
+        operators.add(new Plus());
+        operators.add(new Minus());
+        operators.add(new Times());
+        operators.add(new Divide());
+        return operators;
     }
 }

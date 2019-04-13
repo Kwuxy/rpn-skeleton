@@ -3,6 +3,9 @@ package rpn;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CLITest {
@@ -10,7 +13,8 @@ public class CLITest {
     
     @Before
     public void init_tests() {
-        this.calculator = new Calculator();
+        List<Operator> operators = CLI.getAllOperators();
+        this.calculator = new Calculator(operators);
     }
 
     @Test

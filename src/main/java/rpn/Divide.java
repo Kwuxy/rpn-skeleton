@@ -2,19 +2,20 @@ package rpn;
 
 import java.util.Stack;
 
-public class Plus extends Operator {
-    public Plus() {
-        this.symbol = "+";
+public class Divide extends Operator {
+    public Divide() {
+        this.symbol = "/";
     }
 
     @Override
     public void calculate(Stack<Double> operands) {
-        operands.push(operands.pop() + operands.pop());
+        Double operand = operands.pop();
+        operands.push(operands.pop() / operand);
     }
 
     @Override
     public String toString() {
-        return "Plus{" +
+        return "Divide{" +
                 "symbol='" + symbol + '\'' +
                 '}';
     }
