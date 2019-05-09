@@ -14,7 +14,10 @@ public class CLI {
 
         System.out.println("About to evaluate '" + expression + "'");
         Double result = calculator.evaluate(expression);
-        System.out.println("> " + result);
+
+        if(result != null) {
+            System.out.println("> " + result);
+        }
     }
 
     static List<Operator> getAllOperators() {

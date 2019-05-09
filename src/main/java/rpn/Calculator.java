@@ -13,24 +13,29 @@ public class Calculator {
     public Double evaluate(String expression) {
         Stack<Double> operands = new Stack<>();
         boolean tokenProcessed;
+        try {
+            String[] tokens = expression.replace(',', '.').split(" ");
 
-        String[] tokens = expression.replace(',', '.').split(" ");
+            for(String token : tokens) {
+                tokenProcessed = false;
+                for(Operator operator : operators) {
+                    if(operator.symbol.equals(token)) {
+                        operator.calculate(operands);
+                        tokenProcessed = true;
+                        break;
+                    }
+                }
 
-        for(String token : tokens) {
-            tokenProcessed = false;
-            for(Operator operator : operators) {
-                if(operator.symbol.equals(token)) {
-                    operator.calculate(operands);
-                    tokenProcessed = true;
-                    break;
+                if(!tokenProcessed) {
+                    operands.push(Double.valueOf(token));
                 }
             }
 
-            if(!tokenProcessed) {
-                operands.push(Double.valueOf(token));
-            }
+            return operands.pop();
+        } catch (Exception e) {
+            System.out.println("Veuillez saisir une chaine de caractère valide pour la RPN");
+            return null;
         }
 
-        return operands.pop();
     }
 }
