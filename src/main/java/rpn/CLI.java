@@ -1,5 +1,8 @@
 package rpn;
 
+import rpn.exceptions.InvalidOperatorException;
+import rpn.operators.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,8 +16,16 @@ public class CLI {
         Calculator calculator = new Calculator(operators);
 
         System.out.println("About to evaluate '" + expression + "'");
-        Double result = calculator.evaluate(expression);
-        System.out.println("> " + result);
+        Double result = null;
+        try {
+            result = calculator.evaluate(expression);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(result != null) {
+            System.out.println("> " + result);
+        }
     }
 
     static List<Operator> getAllOperators() {
