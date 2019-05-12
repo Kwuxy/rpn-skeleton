@@ -1,5 +1,6 @@
 package rpn;
 
+import rpn.exceptions.InvalidOperatorException;
 import rpn.operators.Operator;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class Calculator {
         this.operators = operators;
     }
 
-    public Double evaluate(String expression) throws InvalidOperatorException {
+    public Double evaluate(String expression) throws Exception {
         Stack<Double> operands = new Stack<>();
         boolean tokenProcessed;
         String[] tokens = expression.replace(',', '.').split(" ");

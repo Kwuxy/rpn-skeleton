@@ -1,5 +1,6 @@
 package rpn;
 
+import rpn.exceptions.InvalidOperatorException;
 import rpn.operators.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class CLI {
         Double result = null;
         try {
             result = calculator.evaluate(expression);
-        } catch (InvalidOperatorException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
