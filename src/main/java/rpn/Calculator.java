@@ -1,8 +1,10 @@
 package rpn;
 
+import rpn.exceptions.EmptyExpressionException;
 import rpn.exceptions.InvalidOperatorException;
 import rpn.operators.Operator;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -17,6 +19,12 @@ public class Calculator {
         Stack<Double> operands = new Stack<>();
         boolean tokenProcessed;
         String[] tokens = expression.replace(',', '.').split(" ");
+
+        System.out.println(tokens.length + " " + Arrays.toString(tokens));
+
+        if(tokens.length == 0 || (tokens.length == 1 && tokens[0].equals(""))) {
+            throw new EmptyExpressionException();
+        }
 
         for(String token : tokens) {
             //Token is a number

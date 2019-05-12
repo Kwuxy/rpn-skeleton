@@ -2,10 +2,12 @@ package rpn;
 
 import org.junit.Before;
 import org.junit.Test;
+import rpn.exceptions.EmptyExpressionException;
 import rpn.exceptions.InvalidOperatorException;
 import rpn.exceptions.NotEnoughOperandException;
 import rpn.operators.Operator;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -161,6 +163,26 @@ public class CLITest {
             calculator.evaluate("4 /");
         }catch(NotEnoughOperandException e) {
             assertThat(e.getMessage()).isEqualTo("Not enough operands to calculate operator '/'");
+        }
+    }
+
+    @Test
+    public void should_raise_empty_expression_exception_on_empty_expression() throws Exception {
+        System.out.println("Running should_raise_empty_expression_exception_on_empty_expression()");
+        try{
+            calculator.evaluate("");
+        } catch (EmptyExpressionException e) {
+            assertThat(e.getMessage()).isEqualTo("Nothing to evaluate here.");
+        }
+    }
+
+    @Test
+    public void should_raise_empty_expression_exception_on_expression_full_of_spaces() throws Exception {
+        System.out.println("Running should_raise_empty_expression_exception_on_expression_full_of_spaces()");
+        try{
+            calculator.evaluate("          ");
+        } catch (EmptyExpressionException e) {
+            assertThat(e.getMessage()).isEqualTo("Nothing to evaluate here.");
         }
     }
 }
