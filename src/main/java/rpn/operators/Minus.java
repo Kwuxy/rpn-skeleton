@@ -1,20 +1,21 @@
-package rpn;
+package rpn.operators;
 
 import java.util.Stack;
 
-public class Times extends Operator {
-    public Times() {
-        this.symbol = "*";
+public class Minus extends Operator {
+    public Minus() {
+        this.symbol = "-";
     }
 
     @Override
     public void calculate(Stack<Double> operands) {
-        operands.push(operands.pop() * operands.pop());
+        Double operand = operands.pop();
+        operands.push(operands.pop() - operand);
     }
 
     @Override
     public String toString() {
-        return "Times{" +
+        return "Minus{" +
                 "symbol='" + symbol + '\'' +
                 '}';
     }

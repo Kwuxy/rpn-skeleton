@@ -1,5 +1,7 @@
 package rpn;
 
+import rpn.operators.Operator;
+
 import java.util.List;
 import java.util.Stack;
 
@@ -10,32 +12,42 @@ public class Calculator {
         this.operators = operators;
     }
 
-    public Double evaluate(String expression) {
+    public Double evaluate(String expression) throws InvalidOperatorException {
         Stack<Double> operands = new Stack<>();
         boolean tokenProcessed;
-        try {
-            String[] tokens = expression.replace(',', '.').split(" ");
+        String[] tokens = expression.replace(',', '.').split(" ");
 
-            for(String token : tokens) {
-                tokenProcessed = false;
-                for(Operator operator : operators) {
-                    if(operator.symbol.equals(token)) {
-                        operator.calculate(operands);
-                        tokenProcessed = true;
-                        break;
-                    }
-                }
+        for(String token : tokens) {
+            //Token is a number
+            if(tokenIsNumeric(token)) {
+                operands.push(Double.valueOf(token));
+                continue;
+            }
 
-                if(!tokenProcessed) {
-                    operands.push(Double.valueOf(token));
+            tokenProcessed = false;
+            for(Operator operator : operators) { //Token is an implemented operator
+                if(operator.symbol.equals(token)) {
+                    operator.calculate(operands);
+                    tokenProcessed = true;
+                    break;
                 }
             }
 
-            return operands.pop();
-        } catch (Exception e) {
-            System.out.println("Veuillez saisir une chaine de caractère valide pour la RPN");
-            return null;
+            if(!tokenProcessed) { //Token is unknown
+                throw new InvalidOperatorException(token);
+            }
         }
 
+        return operands.pop();
+    }
+
+    private boolean tokenIsNumeric(String token) {
+        try {
+            Double.parseDouble(token);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
     }
 }
